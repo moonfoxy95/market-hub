@@ -1,0 +1,43 @@
+.page {
+  background-color: darkkhaki;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  margin-block-end: 50px;
+}
+
+.main {
+  padding-inline: var(--gap-sections);
+  max-width: 1440px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-sections);
+}
+
+.section {
+  justify-items: center;
+  align-items: center;
+}
+
+.section__title {
+  margin-block-end: 10px;
+}
+
+.section__load-button,
+.section__textarea {
+  display: block;
+}
+
+.section__load-button {
+  margin-block-end: 30px;
+}
+
+.section__textarea {
+  width: 100%;
+  height: 50vh;
+}
+
+
+
