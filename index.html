@@ -14,20 +14,32 @@
     </header>
     
     <main class="main">
-      <section class="section ozon__section">
+      <section class="section ozon-section">
         <h2 class="section__title">Озон</h2>
-        <button class="section__load-button">Загрузить заказы</button>
-        <textarea class="section__textarea"></textarea>
+        <button class="section__load-button" id="ozon-button" type="button">Загрузить заказы</button>
+        <label class="section__label" for="ozon-textarea">
+          <p class="label__orders-count ozon-orders-count">Заказов: </p>
+          <p class="label__goods-count ozon-goods-count">Товаров: </p>
+        </label>
+        <textarea class="section__textarea" id="ozon-textarea"></textarea>
       </section>
-      <section class="section yandex__section">
+      <section class="section yandex-section">
         <h2 class="section__title">Яндекс</h2>
-        <button class="section__load-button">Загрузить заказы</button>
-        <textarea class="section__textarea"></textarea>
+        <button class="section__load-button" id="yandex-button" type="button" disabled>Загрузить заказы</button>
+        <label class="section__label" for="yandex-textarea">
+          <p class="label__orders-count">Заказов: </p>
+          <p class="label__goods-count">Товаров: </p>
+        </label>
+        <textarea class="section__textarea" id="yandex-textarea"></textarea>
       </section>
-      <section class="section aliexpress__section">
+      <section class="section aliexpress-section">
         <h2 class="section__title">Алиэкспресс</h2>
-        <button class="section__load-button">Загрузить заказы</button>
-        <textarea class="section__textarea"></textarea>
+        <button class="section__load-button" id="aliexpress-button" type="button" disabled>Загрузить заказы</button>
+        <label class="section__label" for="aliexpress-textarea">
+          <p class="label__orders-count">Заказов: </p>
+          <p class="label__goods-count">Товаров: </p>
+        </label>
+        <textarea class="section__textarea" id="aliexpress-textarea"></textarea>
       </section>
     </main>
     <script src="./js/index.js"></script>

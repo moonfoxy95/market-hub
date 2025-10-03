@@ -17,11 +17,11 @@
 }
 
 .section {
-  justify-items: center;
-  align-items: center;
+  display: grid;
 }
 
 .section__title {
+  justify-self: center;
   margin-block-end: 10px;
 }
 
@@ -32,11 +32,24 @@
 
 .section__load-button {
   margin-block-end: 30px;
+  justify-self: center;
+  font-size: 1em;
 }
 
 .section__textarea {
+  font-size: 16px;
   width: 100%;
   height: 50vh;
+  resize: vertical;
+}
+
+.section__label {
+  display: inline-block;
+  align-self: start;
+  background-color: lightgrey;
+  border-radius: 10px;
+  margin-block-end: 10px;
+  padding-left: 15px;
 }
 
 
