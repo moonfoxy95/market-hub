@@ -4,44 +4,76 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Market HUB</title>
-    <link rel="stylesheet" href="./styles/variables.css" />
-    <link rel="stylesheet" href="./styles/globals.css" />
-    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="./assets/styles/variables.css" />
+    <link rel="stylesheet" href="./assets/styles/globals.css" />
+    <link rel="stylesheet" href="./assets/styles/style.css" />
   </head>
   <body class="page">
     <header class="header">
-      <h1 class="header__title">Market HUB</h1>
+      <h1 class="header__title">Market <span class="header__title_hub">HUB</span></h1>
     </header>
     
     <main class="main">
       <section class="section ozon-section">
         <h2 class="section__title">Озон</h2>
-        <button class="section__load-button" id="ozon-button" type="button">Загрузить заказы</button>
-        <label class="section__label" for="ozon-textarea">
-          <p class="label__orders-count ozon-orders-count">Заказов: </p>
-          <p class="label__goods-count ozon-goods-count">Товаров: </p>
-        </label>
-        <textarea class="section__textarea" id="ozon-textarea"></textarea>
+        <button class="section__load-button ozon-load-button" id="ozon-button" type="button"><span class="ozon-load-button-text">Загрузить заказы</span></button>
+        <div class="label-wrapper">
+          <label class="section__label" for="ozon-textarea">
+            <span class="label__info label__orders-count">Заказов: <span class="ozon-orders-count"></span></span>
+            <span class="label__info label__goods-count">Товаров: <span class="ozon-goods-count"></span></span>
+          </label>
+          <button class="section__copy-button ozon-copy-button" id="ozon-copy-button" type="button">
+            <svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+              <path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/>
+            </svg>
+          </button>
+        </div>
+        <p class="section__lastload-time ozon-lastload-time"></p>
+        <textarea class="section__textarea ozon-textarea" id="ozon-textarea"></textarea >
       </section>
       <section class="section yandex-section">
         <h2 class="section__title">Яндекс</h2>
-        <button class="section__load-button" id="yandex-button" type="button" disabled>Загрузить заказы</button>
-        <label class="section__label" for="yandex-textarea">
-          <p class="label__orders-count">Заказов: </p>
-          <p class="label__goods-count">Товаров: </p>
-        </label>
-        <textarea class="section__textarea" id="yandex-textarea"></textarea>
+        <button class="section__load-button yandex-load-button" id="yandex-button" type="button" disabled><span class="yandex-load-button-text">Загрузить заказы</span></button>
+        <div class="label-wrapper">
+          <label class="section__label" for="yandex-textarea">
+            <span class="label__info label__orders-count">Заказов: <span class="yandex-orders-count"></span></span>
+            <span class="label__info label__goods-count">Товаров: <span class="yandex-goods-count"></span></span>
+          </label>
+          <button class="section__copy-button yandex-copy-button" id="yandex-copy-button" type="button">
+            <svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+              <path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/>
+            </svg>
+          </button>
+        </div>
+        <p class="section__lastload-time yandex-lastload-time"></p>
+        <textarea class="section__textarea yandex-textarea" id="yandex-textarea"></textarea >
       </section>
       <section class="section aliexpress-section">
         <h2 class="section__title">Алиэкспресс</h2>
-        <button class="section__load-button" id="aliexpress-button" type="button" disabled>Загрузить заказы</button>
-        <label class="section__label" for="aliexpress-textarea">
-          <p class="label__orders-count">Заказов: </p>
-          <p class="label__goods-count">Товаров: </p>
-        </label>
-        <textarea class="section__textarea" id="aliexpress-textarea"></textarea>
+        <button class="section__load-button aliexpress-load-button" id="aliexpress-button" type="button" disabled><span class="aliexpress-load-button-text">Загрузить заказы</span></button>
+        <div class="label-wrapper">
+          <label class="section__label" for="aliexpress-textarea">
+            <span class="label__info label__orders-count">Заказов: <span class="aliexpress-orders-count"></span></span>
+            <span class="label__info label__goods-count">Товаров: <span class="aliexpress-goods-count"></span></span>
+          </label>
+          <button class="section__copy-button aliexpress-copy-button" id="aliexpress-copy-button" type="button">
+            <svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+              <path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/>
+            </svg>
+          </button>
+        </div>
+        <p class="section__lastload-time aliexpress-lastload-time"></p>
+        <textarea class="section__textarea aliexpress-textarea" id="aliexpress-textarea"></textarea >
       </section>
+
     </main>
-    <script src="./js/index.js"></script>
+    <footer class="footer">
+      <div class="footer-wrapper">
+        <p>Made by Vladislav Lisitsin</p>
+        <p><a href="https://github.com/moonfoxy95" target="_blank">github</a></p>
+      </div>
+    </footer>
+    <script src="./assets/js/index.js" type="module"></script>
   </body>
 </html>

@@ -34,6 +34,10 @@ input {
   font-size: inherit;
 }
 
+button[disabled] {
+  cursor: not-allowed;
+}
+
 .visually-hidden {
   position: absolute;
   inline-size: 1px;

@@ -1,0 +1,214 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  background-color: whitesmoke;
+  padding-block-start: 20px;
+  font-family: 'Inter-Variable';
+  background-image: url('../images/bg-6.jpg');
+  backdrop-filter: saturate(1);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 100dvb;
+  background-attachment: fixed;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.header {
+  align-self: center;
+}
+
+.header__title {
+  font-size: 50px;
+  font-variation-settings: var(--font-variative-bolder);
+}
+
+.main {
+  flex-grow: 1;
+  padding-inline: var(--gap-sections);
+  max-width: 1440px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-sections);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  border-radius: 50px;
+}
+
+.section__title {
+  padding-block-start: 10px;
+  font-size: var(--font-size-l);
+  margin-block-end: 10px;
+  overflow: hidden;
+  align-self: center;
+}
+
+.section__load-button {
+  font-size: var(--font-size-m);
+  margin-block-end: 30px;
+  padding-block: 15px;
+  border-radius: var(--border-radius-l);
+  border-color: transparent;
+  transition: background-color 0.3s;
+}
+
+.ozon-load-button {
+  background-color: var(--ozon-color);
+  color: white;
+  font-variation-settings: var(--font-variative-bold);
+}
+
+.yandex-load-button {
+  position: relative;
+  background-color: var(--yandex-color);
+  font-weight: 700;
+  font-variation-settings: var(--font-variative-bold);
+}
+
+.aliexpress-load-button {
+  position: relative;
+  background-color: var(--aliexpress-color);
+  color: white;
+  font-variation-settings: var(--font-variative-bold);
+}
+
+.yandex-load-button-text::before,
+.yandex-load-button-text::after,
+.aliexpress-load-button-text::before,
+.aliexpress-load-button-text::after {
+  content: "";
+  position: absolute;
+  background-image: url('../images/construction.svg');
+  background-repeat: no-repeat;
+  
+  height: 34px;
+  width: 34px;
+  background-size: contain;
+}
+
+.yandex-load-button-text::before,
+.aliexpress-load-button-text::before {
+  left: 5%;
+  top: 20%;
+}
+
+.yandex-load-button-text::after,
+.aliexpress-load-button-text::after {
+  right: 5%;
+  top: 20%;
+}
+
+.label-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  margin-block-end: 10px;
+  font-size: var(--font-size-m);
+  background-color: inherit;
+  border-radius: var(--border-radius-s);
+  padding-left: 15px;
+}
+
+.section__label {
+  width: 100%;
+}
+
+.label__info {
+  display: block;
+  padding-block-start: 5px;
+}
+
+.label__info:last-of-type {
+  padding-block-end: 5px;
+}
+
+.section__copy-button {
+  height: 100%;
+  flex-shrink: 0;
+  flex-grow: 2;
+  border: transparent;
+  aspect-ratio: 1.5 / 1;
+  border-radius: var(--border-radius-s);
+  transition: background-color 0.3s;
+}
+
+.copy-svg {
+  transition: scale 0.3s;
+}
+
+.ozon-copy-button {
+  background-color: var(--ozon-color);
+  fill: var(--color-white);
+}
+
+.yandex-copy-button {
+  background-color: var(--yandex-color);
+}
+
+.aliexpress-copy-button {
+  background-color: var(--aliexpress-color);
+  fill: var(--color-white);
+}
+
+.section__lastload-time {
+  height: 1em;
+  text-align: end;
+  padding-right: 15px;
+  margin-bottom: 5px;
+}
+
+.section__textarea {
+  font-size: 16px;
+  height: 60%;
+  resize: vertical;
+}
+
+.ozon-section,
+.ozon-textarea {
+  background-color: var(--ozon-color-transparent);
+}
+
+.yandex-section,
+.yandex-textarea {
+  background-color: var(--yandex-color-transparent);
+}
+
+.aliexpress-section,
+.aliexpress-textarea {
+  background-color: var(--aliexpress-color-transparent);
+}
+
+.footer {
+  align-self: flex-end;
+}
+
+.footer-wrapper {
+  padding-inline-end: 50px;
+  margin-block-end: 30px;
+  font-size: var(--font-size-m);
+}
+
+/* HOVER FOCUS ACTIVE */
+.ozon-copy-button:hover,
+.ozon-load-button:hover {
+  background-color: var(--ozon-color-dark);
+}
+
+.yandex-copy-button:hover,
+.yandex-load-button:hover {
+  background-color: var(--yandex-color-dark);
+}
+
+.aliexpress-copy-button:hover,
+.aliexpress-load-button:hover {
+  background-color: var(--aliexpress-color-dark);
+}
+
+.section__copy-button:hover .copy-svg{
+  scale: 1.3;
+}

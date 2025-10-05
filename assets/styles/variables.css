@@ -1,0 +1,37 @@
+:root {
+
+  /* размеры вариативного шрифта */
+  --font-variative-bolder: 'wght' 750;
+  --font-variative-bold: 'wght' 650;
+  
+  /* размеры текста */
+  --font-size-xs: 12px;
+  --font-size-s: 16px;
+  --font-size-m: 18px;
+  --font-size-l: 30px;
+  --font-size-xl: 50px;
+
+  /* цвета маркетов */
+  --ozon-color: hsl(220deg 100% 56.47%);
+  --yandex-color: hsl(53.33deg 100% 49.41%);
+  --aliexpress-color: hsl(1.36deg 99.1% 56.47%);
+
+  --ozon-color-dark: hsl(220deg 100% 44.47%);
+  --yandex-color-dark: hsl(53.33deg 100% 46.41%);
+  --aliexpress-color-dark: hsl(1.36deg 99.1% 44.47%);
+
+  --ozon-color-transparent: hsl(220 100% 85% / 0.3);
+  --yandex-color-transparent: hsl(53 100% 65% / 0.3);
+  --aliexpress-color-transparent: hsl(1 99% 85% / 0.3);
+
+  /* цвета */
+  --color-green: hsl(95.94deg 94.92% 38.63%);
+  --color-white: hsl(0 0% 95% / 1);
+
+  /* размеры скруглений */
+  --border-radius-s: 15px;
+  --border-radius-l: 50px;
+
+  /* gap */
+  --gap-sections: 50px;
+}
