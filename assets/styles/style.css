@@ -38,6 +38,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 50px;
+  padding-bottom: 50px;
 }
 
 .section__title {
@@ -49,6 +50,7 @@
 }
 
 .section__load-button {
+  position: relative;
   font-size: var(--font-size-m);
   margin-block-end: 30px;
   padding-block: 15px;
@@ -64,41 +66,34 @@
 }
 
 .yandex-load-button {
-  position: relative;
   background-color: var(--yandex-color);
   font-weight: 700;
   font-variation-settings: var(--font-variative-bold);
 }
 
 .aliexpress-load-button {
-  position: relative;
   background-color: var(--aliexpress-color);
   color: white;
   font-variation-settings: var(--font-variative-bold);
 }
 
-.yandex-load-button-text::before,
-.yandex-load-button-text::after,
-.aliexpress-load-button-text::before,
-.aliexpress-load-button-text::after {
+.temporarily-disabled[disabled]::before,
+.temporarily-disabled[disabled]::after {
   content: "";
   position: absolute;
   background-image: url('../images/construction.svg');
   background-repeat: no-repeat;
-  
+  background-size: contain;
   height: 34px;
   width: 34px;
-  background-size: contain;
 }
 
-.yandex-load-button-text::before,
-.aliexpress-load-button-text::before {
+.temporarily-disabled[disabled]::before {
   left: 5%;
   top: 20%;
 }
 
-.yandex-load-button-text::after,
-.aliexpress-load-button-text::after {
+.temporarily-disabled[disabled]::after {
   right: 5%;
   top: 20%;
 }
@@ -164,8 +159,8 @@
 
 .section__textarea {
   font-size: 16px;
-  height: 60%;
   resize: vertical;
+  flex-grow: 1;
 }
 
 .ozon-section,

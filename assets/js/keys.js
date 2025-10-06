@@ -1,4 +1,4 @@
-export const ozonKey = '6f567181-7283-493c-a8cb-6579f5148054';
+export const ozonKey = 'f6e35d96-e8a3-4f32-aacf-f86ce60ef9df';
 export const ozonClientID = '36739';
 
 export const yandexKey = 'ACMA:ExCOgXcviQINftWJ33Aw7Y2XXB6FWIvX003eJvwm:1bf855e1';

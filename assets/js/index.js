@@ -1,13 +1,10 @@
 //import { ozonKey, ozonClientID, yandexKey, yandexCampaign, aliexpressKey } from './keys.js';
-const ozonKey = '6f567181-7283-493c-a8cb-6579f5148054';
+const ozonKey = 'f6e35d96-e8a3-4f32-aacf-f86ce60ef9df';
 const ozonClientID = '36739';
-
 const yandexKey = 'ACMA:ExCOgXcviQINftWJ33Aw7Y2XXB6FWIvX003eJvwm:1bf855e1';
-const yandexCampaign = '21868557'; // ID кампании, campaign_id
-const yandexBusiness =  '748599'; // ID кабинета, business_id
-
+const yandexCampaignID = '21868557'; // ID кампании, campaign_id
+const yandexBusinessID =  '748599'; // ID кабинета, business_id
 const aliexpressKey = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWxsZXJfaWQiOjEwMTQ1NDI3OTMsInRva2VuX2lkIjoxNDkwMn0.kV4WpA6MMKh5wt_t-asO9WDJ_7I0SdbcApzaIsfod5YLqLFdGGCZ5bGZW5e1IxYvoLm-9IRSDuk0Fsb8G0VeG5v1xc-QApwTulLTGdzRYdOr0YCcTbJ9r7jm7c44ptUxRte7YHy85H-XiE1Q4aMjEeldaGDr_7PMOzzdOO4wKe_5jJn6Nt10PfHAyRcBbAlCBD0KR5mdf_8QllpnJeQ9leg_ydQ6P8D8gJhI3bHjeJn4hhRfcPOrR1-pseSCyXjZjqaUmm9_c6Q8S_YKsNb4oN2NYqxGVytbw4JKtE-2Lu9tTSaowUVtrAPIiYwLbqk23FOcXEYKLzVVqqSJwJFEUi32rcwFc2bycJRbqJRBeUt08097Y4jgFQHbjjpb_TrtP3o97wvkkibmtMNHqrgThKWvGmNRvz4FCtFlUzTxAoGqVYCRgX4jA6YVpcD94sumhPtssqUXRS6Nnjkx-_FLNqoaC5nEUHxJqPgQeze_FQBMOR3_w84L5qWdGsx0N9WB9Mhx88ujrWoUo_YfQsNIzCxr9fx5CvtIZyZdp6TdWgmOkUzpVZRTlg07JP2rOQWrMKwZkoC8BIDOBrKZl2NOy0YvqG2WT3n2edXId2mg1xqyYh1qsrPMkCXreGe4h_FrAstK6fl6hu8kqVi-LVs-qyOjWIVbNE07IGI-hskgxeM';
-
 
 // ДАТЫ 
 //let timeNow = ;
@@ -168,7 +165,7 @@ yandexButton.addEventListener('click', () => {
 */
 
 // КНОПКА АЛИЭКСПРЕСС
-/*
+
 aliexpressButton.addEventListener('click', () => {
   const data = {
     "order_statuses": "Finished"
@@ -177,7 +174,6 @@ aliexpressButton.addEventListener('click', () => {
   fetch('https://openapi.aliexpress.ru/seller-api/v1/order/get-order-list', {
     method: 'POST',
     headers: {
-      'Host': 'api-seller.ozon.ru',
       'x-auth-token': aliexpressKey,
       'Content-Type': 'application/json',
       'accept': 'application/json'
@@ -192,4 +188,3 @@ aliexpressButton.addEventListener('click', () => {
     console.error('Ошибка запроса:', error);
   });
 });
-*/
