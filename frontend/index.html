@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Market HUB</title>
+  <link rel="icon" href="./favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="./assets/fonts/fonts.css" />
   <link rel="stylesheet" href="./assets/styles/variables.css" />
   <link rel="stylesheet" href="./assets/styles/globals.css" />
@@ -13,18 +14,30 @@
 
 <body class="page">
   <header class="header">
+    <div class="server">Server:
+      <span class="server-status"></span>
+      <button type="button" id="ping-button" class="ping-button"><span>Пинг</span></button>
+    </div>
     <h1 class="header__title">Market <span class="header__title_hub">HUB</span></h1>
   </header>
 
   <main class="main">
+
     <section class="section ozon-section">
       <h2 class="section__title">Озон</h2>
-      <button class="section__load-button ozon-load-button" id="ozon-button" type="button"><span
-          class="ozon-load-button-text">Загрузить заказы</span></button>
+      <button class="section__load-button ozon-load-button" id="ozon-button" type="button">
+        <span class="ozon-load-button-text">Загрузить заказы </span>
+      </button>
+      <div class="section__toggle-server">
+        <label for="toggle-server-ozon-checkbox" class="toggle-server-label">Запрос с сервера</label>
+        <input type="checkbox" id="toggle-server-ozon-checkbox" class="toggle-server-checkbox">
+      </div>
       <div class="label-wrapper">
         <label class="section__label" for="ozon-textarea">
-          <span class="label__info label__orders-count">Заказов: <span class="ozon-orders-count"></span></span>
-          <span class="label__info label__goods-count">Товаров: <span class="ozon-goods-count"></span></span>
+          <span class="label__info label__orders-count">Заказов: <span
+              class="orders-count ozon-orders-count"></span></span>
+          <span class="label__info label__goods-count">Товаров: <span
+              class="goods-count ozon-goods-count"></span></span>
         </label>
         <button class="section__copy-button ozon-copy-button" id="ozon-copy-button" type="button">
           <svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
@@ -34,16 +47,24 @@
         </button>
       </div>
       <p class="section__lastload-time ozon-lastload-time"></p>
-      <textarea class="section__textarea ozon-textarea" id="ozon-textarea"></textarea>
+      <textarea class="section__textarea ozon-textarea" id="ozon-textarea" spellcheck="false"></textarea>
     </section>
+
     <section class="section yandex-section">
       <h2 class="section__title">Яндекс</h2>
-      <button class="section__load-button yandex-load-button temporarily-disabled" id="yandex-button" type="button"
-        disabled><span class="yandex-load-button-text">Загрузить заказы</span></button>
+      <button class="section__load-button yandex-load-button" id="yandex-button" type="button">
+        <span class="yandex-load-button-text">Загрузить заказы</span>
+      </button>
+      <div class="section__toggle-server">
+        <label for="toggle-server-yandex-checkbox" class="toggle-server-label">Запрос с сервера</label>
+        <input type="checkbox" id="toggle-server-yandex-checkbox" class="toggle-server-checkbox" checked disabled>
+      </div>
       <div class="label-wrapper">
         <label class="section__label" for="yandex-textarea">
-          <span class="label__info label__orders-count">Заказов: <span class="yandex-orders-count"></span></span>
-          <span class="label__info label__goods-count">Товаров: <span class="yandex-goods-count"></span></span>
+          <span class="label__info label__orders-count">Заказов: <span
+              class="orders-count yandex-orders-count"></span></span>
+          <span class="label__info label__goods-count">Товаров: <span
+              class="goods-count yandex-goods-count"></span></span>
         </label>
         <button class="section__copy-button yandex-copy-button" id="yandex-copy-button" type="button">
           <svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
@@ -53,16 +74,24 @@
         </button>
       </div>
       <p class="section__lastload-time yandex-lastload-time"></p>
-      <textarea class="section__textarea yandex-textarea" id="yandex-textarea"></textarea>
+      <textarea class="section__textarea yandex-textarea" id="yandex-textarea" spellcheck="false"></textarea>
     </section>
+
     <section class="section aliexpress-section">
       <h2 class="section__title">Алиэкспресс</h2>
-      <button class="section__load-button aliexpress-load-button temporarily-disabled" id="aliexpress-button"
-        type="button" disabled><span class="aliexpress-load-button-text">Загрузить заказы</span></button>
+      <button class="section__load-button aliexpress-load-button" id="aliexpress-button" type="button">
+        <span class="aliexpress-load-button-text">Загрузить заказы</span>
+      </button>
+      <div class="section__toggle-server">
+        <label for="toggle-server-aliexpress-checkbox" class="toggle-server-label">Запрос с сервера</label>
+        <input type="checkbox" id="toggle-server-aliexpress-checkbox" class="toggle-server-checkbox" checked disabled>
+      </div>
       <div class="label-wrapper">
         <label class="section__label" for="aliexpress-textarea">
-          <span class="label__info label__orders-count">Заказов: <span class="aliexpress-orders-count"></span></span>
-          <span class="label__info label__goods-count">Товаров: <span class="aliexpress-goods-count"></span></span>
+          <span class="label__info label__orders-count">Заказов: <span
+              class="orders-count aliexpress-orders-count"></span></span>
+          <span class="label__info label__goods-count">Товаров: <span
+              class="goods-count aliexpress-goods-count"></span></span>
         </label>
         <button class="section__copy-button aliexpress-copy-button" id="aliexpress-copy-button" type="button">
           <svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
@@ -72,7 +101,7 @@
         </button>
       </div>
       <p class="section__lastload-time aliexpress-lastload-time"></p>
-      <textarea class="section__textarea aliexpress-textarea" id="aliexpress-textarea"></textarea>
+      <textarea class="section__textarea aliexpress-textarea" id="aliexpress-textarea" spellcheck="false"></textarea>
     </section>
 
   </main>

@@ -1,33 +1,17 @@
-//import { ozonKey, ozonClientID, yandexKey, yandexCampaign, aliexpressKey } from './keys.js';
-const ozonKey = 'f6e35d96-e8a3-4f32-aacf-f86ce60ef9df';
-const ozonClientID = '36739';
-const yandexKey = 'ACMA:ExCOgXcviQINftWJ33Aw7Y2XXB6FWIvX003eJvwm:1bf855e1';
-const yandexCampaignID = '21868557'; // ID кампании, campaign_id
-const yandexBusinessID =  '748599'; // ID кабинета, business_id
-const aliexpressKey = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWxsZXJfaWQiOjEwMTQ1NDI3OTMsInRva2VuX2lkIjoxNDkwMn0.kV4WpA6MMKh5wt_t-asO9WDJ_7I0SdbcApzaIsfod5YLqLFdGGCZ5bGZW5e1IxYvoLm-9IRSDuk0Fsb8G0VeG5v1xc-QApwTulLTGdzRYdOr0YCcTbJ9r7jm7c44ptUxRte7YHy85H-XiE1Q4aMjEeldaGDr_7PMOzzdOO4wKe_5jJn6Nt10PfHAyRcBbAlCBD0KR5mdf_8QllpnJeQ9leg_ydQ6P8D8gJhI3bHjeJn4hhRfcPOrR1-pseSCyXjZjqaUmm9_c6Q8S_YKsNb4oN2NYqxGVytbw4JKtE-2Lu9tTSaowUVtrAPIiYwLbqk23FOcXEYKLzVVqqSJwJFEUi32rcwFc2bycJRbqJRBeUt08097Y4jgFQHbjjpb_TrtP3o97wvkkibmtMNHqrgThKWvGmNRvz4FCtFlUzTxAoGqVYCRgX4jA6YVpcD94sumhPtssqUXRS6Nnjkx-_FLNqoaC5nEUHxJqPgQeze_FQBMOR3_w84L5qWdGsx0N9WB9Mhx88ujrWoUo_YfQsNIzCxr9fx5CvtIZyZdp6TdWgmOkUzpVZRTlg07JP2rOQWrMKwZkoC8BIDOBrKZl2NOy0YvqG2WT3n2edXId2mg1xqyYh1qsrPMkCXreGe4h_FrAstK6fl6hu8kqVi-LVs-qyOjWIVbNE07IGI-hskgxeM';
+'use strict'
 
-// ДАТЫ 
-//let timeNow = ;
-let time7DaysAgo = new Date(new Date().setDate(new Date().getDate() - 7)).toISOString();
-let time14DaysAhead = new Date(new Date().setDate(new Date().getDate() + 14)).toISOString();
+const BACKEND_URL = 'http://localhost:3000';
 
-// ЭЛЕМЕНТЫ ОЗОН
-const ozonButton = document.querySelector('#ozon-button');
-const ozonTextArea = document.querySelector('#ozon-textarea');
-const ozonOrdersCount = document.querySelector('.ozon-orders-count');
-const ozonGoodsCount = document.querySelector('.ozon-goods-count');
-const ozonLastloadTime = document.querySelector('.ozon-lastload-time');
-const ozonCopyButton = document.querySelector('#ozon-copy-button');
+let getOzonOrdersFromBrowser = async function (market, section) {
+  const ozonKey = 'f6e35d96-e8a3-4f32-aacf-f86ce60ef9df';
+  const ozonClientID = 36739;
 
-// ЭЛЕМЕНТЫ ЯНДЕКС
-const yandexButton = document.querySelector('#yandex-button');
+  let time7DaysAgo = new Date(new Date().setDate(new Date().getDate() - 7)).toISOString();
+  let time14DaysAhead = new Date(new Date().setDate(new Date().getDate() + 14)).toISOString();
 
-// ЭЛЕМЕНТЫ АЛИЭКСПРЕСС
-const aliexpressButton = document.querySelector('#aliexpress-button');
+  let sectionButton = section.querySelector('.section__load-button');
 
-// КНОПКА ОЗОН
-ozonButton.addEventListener('click', () => {
-  const data = {
+  const requestBody = {
     "dir": "ASC",
     "filter": {
       "cutoff_from": time7DaysAgo,
@@ -47,144 +31,245 @@ ozonButton.addEventListener('click', () => {
       "legal_info": false,
       "translit": true
     }
-	};
+  };
 
-  ozonButton.disabled = true;
+  sectionButton.disabled = true;
 
-  fetch('https://api-seller.ozon.ru/v3/posting/fbs/unfulfilled/list', {
-    method: 'POST',
-    headers: {
-      'Host': 'api-seller.ozon.ru',
-      'Client-Id': ozonClientID,
-      'Api-Key': ozonKey,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(result => {
-    console.log('Ответ сервера:', result);
-    let resultLenght = result.result.count;
-    let postingsArr = result.result.postings;
-    let allPostingsText = '';
-    let allPostingsCount = 0;
-    let articlesArr = [];
+  try {
+    let response = await fetch('https://api-seller.ozon.ru/v3/posting/fbs/unfulfilled/list', {
+      method: 'POST',
+      headers: {
+        'Host': 'api-seller.ozon.ru',
+        'Client-Id': ozonClientID,
+        'Api-Key': ozonKey,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestBody)
+    })
 
-    postingsArr.forEach((posting) => {
-      posting.products.forEach((product) => {
-
-        // обрезка A_
-        while (product.offer_id.startsWith('A_')) {
-          product.offer_id = product.offer_id.substring(2);
-        };
-
-        let articleObj = {
-          article: product.offer_id,
-          quantity: product.quantity,
-          name: product.name
-        };
-        articlesArr.push(articleObj);
-
-        allPostingsCount += 1;
-      })
-    });
-
-    // сортировка
-    articlesArr.sort((a, b) => a.article.localeCompare(b.article));
-
-    // группировка 1 + 1
-    for (let i = 0; i < articlesArr.length - 1; i++) {
-      if (articlesArr[i].article === articlesArr[i + 1].article) {
-        articlesArr[i].quantity += ` + ${articlesArr[i + 1].quantity}`;
-        articlesArr.splice(i + 1, 1);
-        i--; // Чтобы проверить текущий элемент с новым следующим
-      }
-    }
-
-    articlesArr.forEach((e) => {
-      allPostingsText += `${e.article} |${e.quantity} шт| ${e.name}\n`;
-    });
-
-    ozonOrdersCount.textContent = resultLenght;
-    ozonTextArea.value = allPostingsText;
-    ozonGoodsCount.textContent = allPostingsCount;
-    ozonLastloadTime.textContent = new Date().toLocaleTimeString();
-    
-    ozonButton.style.backgroundColor = 'var(--color-green)';
-    setTimeout(() => {
-      ozonButton.style.backgroundColor = 'revert-layer',
-      ozonButton.disabled = false;
-    }, 2000);
-  })
-  .catch(error => {
-    console.error('Ошибка запроса:', error);
-    ozonButton.disabled = false;
-  });
-});
-
-// КНОПКА КОПИРОВАТЬ
-document.querySelectorAll('.section__copy-button').forEach((marketButton, index) => {
-  marketButton.addEventListener('click', () => {
-  navigator.clipboard.writeText(document.querySelectorAll('.section__textarea')[index].value).then(() => {
-    marketButton.style.backgroundColor = 'var(--color-green)';
-    marketButton.disabled = true;
-    setTimeout(() => {
-      marketButton.style.backgroundColor = 'revert-layer',
-      marketButton.disabled = false;
-    }, 2000);
-  }).catch(() => alert('Ошибка копирования'));
-  });
-});
-
-// КНОПКА ЯНДЕКС
-/*
-yandexButton.addEventListener('click', () => {
-	fetch(`https://api.partner.market.yandex.ru/v2/campaigns/${yandexCampaign}/orders?substatus=STARTED`, {
-		method: 'GET',
-		headers: {
-      'Api-Key': yandexKey,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify()
-	})
-  .then(response => {
     if (!response.ok) {
-      throw new Error('Ошибка сети: ' + response.status);
+      throw new Error(`Ошибка при получении заказов озон из браузера: ${response.status} ${response.statusText}`)
     }
-    return response.json();  // или response.text(), если нужен текст
-  })
-  .then(data => {
-    console.log('Полученные данные:', data);
-    // Здесь можно обработать и вывести данные на страницу
-  })
-  .catch(error => {
-    console.error('Ошибка запроса:', error);
-  });
-});
-*/
 
-// КНОПКА АЛИЭКСПРЕСС
+    let result = await response.json();
+    console.log(`Ответ от запроса браузера к ${market}:\n`, result);
+    processOrders(result, market, section);
 
-aliexpressButton.addEventListener('click', () => {
-  const data = {
-    "order_statuses": "Finished"
-	};
+  } catch (error) {
+    console.error('Ошибка при запросе из браузера:', error);
+  } finally {
+    sectionButton.style.backgroundColor = 'var(--color-green)';
+    setTimeout(() => {
+      sectionButton.style.backgroundColor = 'revert-layer',
+        sectionButton.disabled = false;
+    }, 2000);
+  }
+}
 
-  fetch('https://openapi.aliexpress.ru/seller-api/v1/order/get-order-list', {
-    method: 'POST',
-    headers: {
-      'x-auth-token': aliexpressKey,
-      'Content-Type': 'application/json',
-      'accept': 'application/json'
+let getOrdersFromServer = async function (market, section) {
+  let sectionButton = section.querySelector('.section__load-button');
+
+  sectionButton.disabled = true;
+
+  try {
+    let response = await fetch(`${BACKEND_URL}/api/${market}/orders`, {
+      method: 'POST'
+    });
+
+    if (!response.ok) {
+      throw new Error(`Наш сервер выдал ошибку: ${response.status} ${response.statusText}`);
+    }
+
+    let result = await response.json();
+    console.log(`Ответ от запроса сервера к ${market}:\n`, result);
+    processOrders(result, market, section);
+
+  } catch (error) {
+    console.error('Ошибка при запросе:', error);
+    sectionButton.disabled = false;
+  } finally { // TODO: сделать при catch темный background в setTimeout
+    sectionButton.style.backgroundColor = 'var(--color-green)';
+    setTimeout(() => {
+      sectionButton.style.backgroundColor = 'revert-layer',
+        sectionButton.disabled = false;
+    }, 2000);
+  }
+};
+
+let processOrders = function (data, market, section) {
+  let sectionButton = section.querySelector('.section__load-button');
+  let sectionTextArea = section.querySelector('.section__textarea');
+  let sectionOrdersCount = section.querySelector('.orders-count');
+  let sectionGoodsCount = section.querySelector('.goods-count');
+  let sectionLastloadTime = section.querySelector('.section__lastload-time');
+  let sectionCopyButton = section.querySelector('.section__copy-button');
+
+  let marketProperties = [
+    {
+      'market': 'ozon',
+      'ordersArray': ['result', 'postings'],
+      'productsArray': 'products',
+      'article': 'offer_id',
+      'name': 'name',
+      'quantity': 'quantity',
     },
-    body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(result => {
-    console.log('Ответ сервера:', result);
-  })
-  .catch(error => {
-    console.error('Ошибка запроса:', error);
+    {
+      'market': 'yandex',
+      'ordersArray': ['orders'],
+      'productsArray': 'items',
+      'article': 'offerId',
+      'name': 'offerName',
+      'quantity': 'count',
+    },
+    {
+      'market': 'ali',
+      'ordersArray': ['data', 'orders'],
+      'productsArray': 'order_lines',
+      'article': 'sku_code',
+      'name': 'name',
+      'quantity': 'quantity',
+    },
+  ]
+
+  let currentMarket = marketProperties.find((obj) => obj.market === market);
+  let ordersArray = currentMarket.ordersArray.reduce((sum, value) => {
+    return sum[value];
+  }, data);
+
+  let ordersQuantity = ordersArray.length;
+  let allProductsText = '';
+  let allProductsCount = 0;
+  let articlesArr = [];
+  let noArticleCounter = 1;
+
+  ordersArray.forEach((order) => {
+    order[currentMarket.productsArray].forEach((product) => {
+
+      // в АЛИ есть товары без артикула
+      let article = product[currentMarket.article];
+      if (!article) {
+        article = `БЕЗ_АРТИКУЛА_${noArticleCounter}`;
+        noArticleCounter++
+      }
+
+      // обрезка A_
+      while (article.startsWith('A_')) {
+        article = article.substring(2) || 'no-article';
+      };
+
+      let articleObj = {
+        article: article,
+        name: product[currentMarket.name],
+        quantity: product[currentMarket.quantity],
+      };
+      articlesArr.push(articleObj);
+
+      allProductsCount += 1;
+    })
   });
-});
+
+  // сортировка
+  articlesArr.sort((a, b) => a.article.localeCompare(b.article, undefined, { numeric: true }));
+
+  // группировка 1 + 1
+  for (let i = 0; i < articlesArr.length - 1; i++) {
+    if (articlesArr[i].article === articlesArr[i + 1].article) {
+      articlesArr[i].quantity += ` + ${articlesArr[i + 1].quantity}`;
+      articlesArr.splice(i + 1, 1);
+      i--; // Чтобы проверить текущий элемент с новым следующим
+    }
+  }
+
+  articlesArr.forEach((e) => {
+    allProductsText += `${e.article} |${e.quantity} шт| ${e.name}\n`;
+  });
+
+  sectionOrdersCount.textContent = ordersQuantity;
+  sectionTextArea.value = allProductsText;
+  sectionGoodsCount.textContent = allProductsCount;
+  sectionLastloadTime.textContent = new Date().toLocaleTimeString();
+}
+
+let fetchOrders = function (event) {
+  let button = event.target.closest('.section__load-button');
+  //if (!button) return;
+
+  let section = event.target.closest('.section');
+  let serverCheckbox = section.querySelector('.toggle-server-checkbox');
+
+  if (button.id === 'ozon-button') {
+    if (serverCheckbox.checked) {
+      getOrdersFromServer('ozon', section);
+    } else {
+      getOzonOrdersFromBrowser('ozon', section);
+    }
+
+  } else if (button.id === 'yandex-button') {
+    if (serverCheckbox.checked) {
+      getOrdersFromServer('yandex', section);
+    } else {
+      console.log('Отправка только с сервера');
+    }
+
+  } else if (button.id === 'aliexpress-button') {
+    if (serverCheckbox.checked) {
+      getOrdersFromServer('ali', section);
+    } else {
+      console.log('Отправка только с сервера');
+    }
+  }
+}
+
+let copyTextareaOrders = async function () {
+  let button = event.target.closest('.section__copy-button');
+  if (!button) return;
+
+  let section = event.target.closest('.section');
+  let copyButton = section.querySelector('.section__copy-button')
+  let textarea = section.querySelector('.section__textarea');
+
+  try {
+    await navigator.clipboard.writeText(textarea.value);
+    copyButton.style.backgroundColor = 'var(--color-green)';
+    copyButton.disabled = true;
+
+    setTimeout(() => {
+      copyButton.style.backgroundColor = 'revert-layer',
+        copyButton.disabled = false;
+    }, 2000);
+
+  } catch (error) {
+    alert('Ошибка копирования')
+  };
+}
+
+let pingServer = async function () {
+  try {
+    renderPingCircle('⌛', 'Ожидание ответа');
+    let response = await fetch(`${BACKEND_URL}/api/server-status`, {
+      cache: 'no-cache'
+    });
+
+    if (response.ok) {
+      renderPingCircle('🟢', 'Включен');
+    } else {
+      renderPingCircle('🔴', 'Включен, но что-то не так');
+    }
+  } catch {
+    renderPingCircle('⚪', 'Выключен');
+  }
+}
+
+let renderPingCircle = function (coloredCircle, titleText) {
+  let circle = document.body.querySelector('.server-status');
+  circle.textContent = coloredCircle;
+  circle.title = titleText;
+}
+
+document.body.addEventListener('click', (event) => {
+  if (event.target.closest('.section__load-button')) fetchOrders(event);
+  copyTextareaOrders(event);
+  if (event.target.closest('#ping-button')) pingServer(event);
+})
+
+pingServer();
